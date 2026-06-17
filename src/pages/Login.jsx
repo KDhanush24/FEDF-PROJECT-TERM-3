@@ -1,6 +1,18 @@
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 function Login() {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = () => {
+  if (email === "" || password === "") {
+    alert("Please enter Email and Password");
+    return;
+  }
+
+  navigate("/dashboard");
+};
   return (
     <div className="min-h-screen flex">
       {/* Left Section */}
@@ -21,18 +33,22 @@ function Login() {
           <h2 className="text-4xl font-bold text-center mb-8">Login</h2>
 
           <input
-            type="email"
-            placeholder="Email Address"
-            className="w-full border border-gray-300 p-4 rounded-lg mb-4"
+          type="email"
+          placeholder="Email Address"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="w-full border border-gray-300 p-4 rounded-lg mb-4"
           />
 
           <input
             type="password"
             placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             className="w-full border border-gray-300 p-4 rounded-lg mb-6"
           />
 
-          <button className="w-full bg-blue-600 text-white p-4 rounded-lg text-lg font-semibold">
+          <button onClick={handleLogin} className="w-full bg-blue-600 text-white p-4 rounded-lg text-lg font-semibold">
             Login
           </button>
 
